@@ -25,21 +25,23 @@ class BinarySearhTree{
         else{
             let current=this.root;
             while(true){
-                if(data === current.value) return undefined
+                if(data === current.value) 
+                    return
                 if(data < current.value){
                     if(current.left === null){
                         current.left = newNode
                         current.left.horizontal=current.horizontal-1
                         
                     }
-                    current = current.left
+                    else{
+                    current = current.left}
                 } else {
                     if(current.right === null){
                         current.right = newNode
                         current.right.horizontal=current.horizontal+1
-                        return this
-                    } 
-                    current = current.right
+                        
+                    } else{
+                    current = current.right}
                 }
             }
         }
