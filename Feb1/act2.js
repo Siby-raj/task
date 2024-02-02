@@ -7,7 +7,7 @@ class Graph {
     }
     addEdge(fromNode, toNode) {
       this.list[fromNode].push(toNode);
-      this.list[toNode].push(fromNode);
+    //   this.list[toNode].push(fromNode);
     }
 
     
