@@ -1,10 +1,6 @@
 //KMP algorithm for pattern matching
-
-	
-	
-	function computeLPSArray(pat, M, lps)
+function computeLPSArray(pat, M, lps)
 	{
-		
 		var len = 0;
 		var i = 1;
 		lps[0] = 0; 
@@ -14,31 +10,30 @@
 			if (pat.charAt(i) == pat.charAt(len)) {
 				len++;
 				lps[i] = len;
+                console.log("1",lps)
 				i++;
 			}
 			else 
 			{
-				
 				if (len != 0) {
-					len = lps[len - 1];
-	
-					
+					len = lps[len - 1];		
+                    console.log("2",lps)
 				}
 				else 
 				{
 					lps[i] = len;
+                    console.log("3",lps)
 					i++;
 				}
 			}
 		}
-        console.log(lps)
+       // console.log(lps)
 	}
 	
 	function KMPSearch(pat,txt)
 	{
 		var M = pat.length;
 		var N = txt.length;
-	
 		
 		var lps = [];
 		var j = 0; 
@@ -68,6 +63,6 @@
 	
 	
     var txt = "ABABDABACDABABCABAB";
-    var pat = "ABABCABAB";
+    var pat = "AABAACAABAA";
 
 	KMPSearch(pat, txt)
