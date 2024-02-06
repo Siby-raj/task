@@ -17,7 +17,7 @@ function computeLPSArray(pat, M, lps)
 			{
 				if (len != 0) {
 					len = lps[len - 1];		
-                    console.log("2",lps)
+                    console.log("2",len)
 				}
 				else 
 				{
