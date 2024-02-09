@@ -1,50 +1,74 @@
-function ratInMaze(m,n){
-    let visited = new Array(n);
-    for(let i=0; i<n; i++){
-        visited[i] = new Array(n).fill(0);
-    }
-    console.log(visited)
+function ratInMaze(m, n) {
+    let viewed = [];
     let result = [];
-    
-    let path = (m, x, y, dir, n) => {
-        if (x === n - 1 && y === n - 1) {
+
+    for (let i = 0; i < n; i++) {
+        viewed[i] = [];
+        for (let j = 0; j < n; j++) {
+            viewed[i][j] = 1;
+        }
+    }
+
+    function path(i, j, dir) {
+        if (i === n - 1 && j === n - 1) {
             result.push(dir);
             return;
         }
-    
-       if (m[x][y] === 0 || visited[x][y] === 1) return;
-    
-        
-        visited[x][y] = 1;
-        if (x > 0) path(m, x - 1, y, dir + 'U', n);
-        if (y > 0) path(m, x, y - 1, dir + 'L', n);
-        if (x < n - 1) path(m, x + 1, y, dir + 'D', n);
-        if (y < n - 1) path(m, x, y + 1, dir + 'R', n);
-        visited[x][y] = 0;
-        
-    }
-    console.log(visited)
-    
-    for(let i=0; i<n; i++){
-        for(let j=0; j<n; j++){
-            visited[i][j] = false;
+       // console.log(result)
+        if (i + 1 < n && m[i + 1][j] === 1 && viewed[i + 1][j] === 1) {
+            viewed[i][j] = 0;
+            path(i + 1, j, dir + "D");
+            viewed[i][j] = 1;
+        }
+
+        if (j + 1 < n && m[i][j + 1] === 1 && viewed[i][j + 1] === 1) {
+            viewed[i][j] = 0;
+            path(i, j + 1, dir + "R");
+            viewed[i][j] = 1;
+        }
+
+        if (j - 1 >= 0 && m[i][j - 1] === 1 && viewed[i][j - 1] === 1) {
+            viewed[i][j] = 0;
+            path(i, j - 1, dir + "L");
+            viewed[i][j] = 1;
+        }
+
+        if (i - 1 >= 0 && m[i - 1][j] === 1 && viewed[i - 1][j] === 1) {
+            viewed[i][j] = 0;
+            path(i - 1, j, dir + "U");
+            viewed[i][j] = 1;
         }
     }
-    console.log(visited)
-    if (m[0][0] === 0 || m[n - 1][n - 1] === 0) return result;
-    
-    path(m, 0, 0, "", n);
-    
-    result.sort();
-    return result;
+
+    path(0, 0, "");
+    let k=[]
+    let e
+    let r=[]
+    for(let w=0;w<result.length;w++){
+        k.push(result[w].length)
+        e=Math.min(k)
+
+    }
+    for(let w=0;w<result.length;w++){
+        k.push(result[w].length)
+    }
+    e=Math.min(...k)
+    for(let w=0;w<result.length;w++){
+      if(result[w].length===e){
+        r.push(result[w])
+      }
+
+    }
+    result.sort()
+    return r ;
 }
-    
 
-let m=[
-    [1,1,1,0],
-    [1,0,1,1],
-    [1,0,0,1],
-    [1,1,1,1]]
-let n=4
+let m = [
+    [1, 1, 1, 0],
+    [1, 1, 1, 1],
+    [1, 0, 0, 1],
+    [1, 1, 1, 1]
+];
+let n = 4;
 
-console.log(ratInMaze(m,n))
+console.log(ratInMaze(m, n));
